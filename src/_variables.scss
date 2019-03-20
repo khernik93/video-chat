@@ -1,0 +1,34 @@
+$primary-font: "Roboto", "Helvetica", "Arial", sans-serif;
+$break-small: 320px;
+$break-mobile: 800px;
+$break-large: 1200px;
+
+// Colors
+$black: #2f2f2f;
+$grey: #9d9d9d;
+$mediumgrey: #DCDCDC;
+$lightgrey: #f0f0f0;
+$red: #EF5350;
+$white: white;
+$lightgreen: #66BB6A;
+
+// Letter spacings
+$smallLetterSpacing: 0.08rem;
+$highLetterSpacing: 0.26rem;
+
+// Used in RWD
+$smallPoint: 700px;
+$mediumPoint: 1000px;
+
+// z-index
+$swiperOverlay: 2;
+$swiperNav: 3;
+$selfieImage: 3;
+$footer: 3;
+$notification: 4;
+$swiperPostTitle: 5;
+
+// fixed footer
+$footerHeight: 65px;
+
+$maxPostHeight: 400px;
