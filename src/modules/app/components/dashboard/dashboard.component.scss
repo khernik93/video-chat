@@ -1,0 +1,22 @@
+@import "../../../../variables";
+
+.left-pane {
+  width: 30%;
+  padding: 20px;
+  background-color: $lightgrey;
+  min-height: 100vh;
+  float: left;
+}
+
+.right-pane {
+  float: left;
+  width: 70%;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.header {
+  font-size: 2em;
+  text-align: center;
+  padding-bottom: 20px;
+}

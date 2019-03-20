@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { LayoutContainer } from '../containers/layout/layout.container';
+import { LayoutComponent } from '../components/layout/layout.component';
 
 export const appRoutesTree: Routes = [
   { 
     path: '',
-    component: LayoutContainer,
+    component: LayoutComponent,
     pathMatch: 'full'
   }
 ];
