@@ -97,6 +97,8 @@ hr.breaking-line {
   float: left;
   color: $red;
   margin-left: 20px;
+  margin-top: 5px;
+  width: 100%;
 }
 
 .well {
@@ -111,4 +113,13 @@ hr.breaking-line {
       font-family: 'BeyondTheMountains';
     }
   }
+}
+
+.no-content {
+  color: $grey;
+  font-size: 0.8em;
+}
+
+button {
+  margin: 5px;
 }

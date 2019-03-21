@@ -1,0 +1,15 @@
+<div class="modal-header">
+  <h2 class="modal-title" id="modal-basic-title">Create room</h2>
+  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="createRoomForm">
+    <input class="form-control" type="password" placeholder="Enter room key..." formControlName="key">
+    <span class="validation-input-error" *ngIf="isInvalid('key')"><h4>Key needs to have minimum 6 characters</h4></span>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-success" (click)="createRoom()" [disabled]="!createRoomForm.valid">Create</button>
+</div>

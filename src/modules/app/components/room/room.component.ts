@@ -1,21 +1,59 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CreateRoomFormModalComponent } from './components/createRoomFormModal/createRoomFormModal.component';
 
 @Component({
   selector: 'room-component',
   styleUrls: ['./room.component.scss'],
-  template: `
-    <input class="form-control" type="text" [(ngModel)]="room">
-    <button class="btn btn-primary" (click)="changeRoom()">Change room</button>
-  `
+  templateUrl: './room.component.html'
 })
-export class RoomComponent { 
+export class RoomComponent implements OnInit {
 
-  @Output() onChangeRoom = new EventEmitter<number>();
+  @Input() createRoomForm: FormGroup;
+  @Input() joinRoomForm: FormGroup;
+  @Output() onJoinRoom = new EventEmitter<NewRoom>();
+  @Output() onCreateRoom = new EventEmitter<NewRoom>();
 
-  room: string;
+  constructor(
+    private modalService: NgbModal
+  ) { }
 
-  changeRoom() {
-    this.onChangeRoom.emit(+this.room);
+  ngOnInit() {
+    this.buildCreateRoomForm();
+    this.buildJoinRoomForm();
+  }
+
+  private buildCreateRoomForm() {
+    this.createRoomForm = new FormGroup({
+      key: new FormControl('', [Validators.required, Validators.minLength(6)])
+    });
+  }
+
+  private buildJoinRoomForm() {
+    this.joinRoomForm = new FormGroup({
+      id: new FormControl('', Validators.required),
+      key: new FormControl('', Validators.required)
+    });
+  }
+
+  isInvalid(control: string): boolean {
+    const isValid = this.joinRoomForm.get(control).valid;
+    const isTouched = this.joinRoomForm.get(control).touched;
+    return !isValid && isTouched;
+  }
+
+  showCreateRoomFormModal() {
+    const modalRef = this.modalService.open(CreateRoomFormModalComponent);
+    modalRef.componentInstance.createRoomForm = this.createRoomForm;
+    modalRef.componentInstance.onCreateRoom.subscribe((newRoom: NewRoom) => {
+      this.onCreateRoom.emit(newRoom);
+    });
+  }
+
+  joinRoom() {
+    const newRoom: NewRoom = this.joinRoomForm.value;
+    this.onJoinRoom.emit(newRoom);
   }
 
 }

@@ -3,11 +3,6 @@ declare var ENV: string;
 declare var PORT: number;
 declare var STORE_DEV_TOOLS: string;
 declare var API_KEY: string;
-declare var System: SystemJS;
-
-interface SystemJS {
-  import: (path?: string) => Promise<any>;
-}
 
 interface WebpackModule {
   hot: {
@@ -24,10 +19,22 @@ interface WebpackModule {
     removeStatusHandler(callback?: (status?: string) => void): void;
   };
 }
-interface WebpackRequire extends NodeRequireFunction {
-  context(file: string, flag?: boolean, exp?: RegExp): any;
+
+interface NodeModule extends WebpackModule {}
+
+// Custom types
+
+interface Players {
+  localVideoRef: any,
+  remoteVideoRef: any
 }
 
-// Extend typings
-interface NodeRequire extends WebpackRequire {}
-interface NodeModule extends WebpackModule {}
+interface NewRoom {
+  id?: string;
+  key: string;
+}
+
+interface Room {
+  id: string;
+  initiator: boolean;
+}

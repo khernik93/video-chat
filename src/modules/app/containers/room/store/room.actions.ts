@@ -7,7 +7,7 @@ export enum RoomActionTypes {
 
 export class SetRoom implements Action {
   readonly type = RoomActionTypes.SetRoom;
-  constructor(public room: number) { }
+  constructor(public room: Room) { }
 }
 
 export class SetInCall implements Action {

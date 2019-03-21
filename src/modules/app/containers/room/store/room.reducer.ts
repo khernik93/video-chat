@@ -1,19 +1,19 @@
 import { RoomActions, RoomActionTypes } from './room.actions';
 
 export interface RoomState {
-  current: number;
+  room: Room;
   inCall: boolean;
 }
 
 export const initialState: RoomState = {
-  current: null,
+  room: null,
   inCall: false
 };
 
 export function roomReducer(state = initialState, action: RoomActions): RoomState {
   switch (action.type) {
     case RoomActionTypes.SetRoom: {
-      return { ...state, current: action.room };
+      return { ...state, room: action.room };
     }
     case RoomActionTypes.SetInCall: {
       return { ...state, inCall: action.inCall };

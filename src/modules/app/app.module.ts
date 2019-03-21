@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AppComponent } from './app.component';
@@ -14,24 +14,34 @@ import { syncReducers } from './store/app.reducers';
 import { StoreModule } from '@ngrx/store';
 import { VideoComponent } from './components/video/video.component';
 import { VideoContainer } from './containers/video/video.container';
+import { VideoService } from '../../services/video/video.service';
+import { SocketService } from '../../services/socket/socket.service';
+import { CreateRoomFormModalComponent } from './components/room/components/createRoomFormModal/createRoomFormModal.component';
+import { BackendClient } from '../../services/api/clients/backend/backend.client';
+import { BackendService } from '../../services/api/clients/backend/backend.service';
+import { TransferHttpService } from '../../services/api/transferHttp.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 export const MODULE_DECLARATIONS = [
-  DashboardComponent
+  DashboardComponent,
+  RoomContainer,
+  RoomComponent,
+  VideoComponent,
+  VideoContainer,
+  CreateRoomFormModalComponent
 ];
 
 const LAYOUT_MODULE_DECLARATIONS = [
   AppComponent,
-  LayoutComponent,
-  RoomContainer,
-  RoomComponent,
-  VideoComponent,
-  VideoContainer
+  LayoutComponent
 ];
 
 export const MODULE_IMPORTS = [
   BrowserModule,
   HttpClientModule,
-  FormsModule
+  FormsModule,
+  ReactiveFormsModule,
+  NgbModule.forRoot()
 ];
 
 const ROUTING_MODULE_IMPORTS = [
@@ -52,9 +62,16 @@ const STORE_IMPORTS = [
     ...ROUTING_MODULE_IMPORTS,
     ...STORE_IMPORTS
   ],
-  providers: [],
+  providers: [
+    VideoService, 
+    SocketService,
+    BackendClient,
+    BackendService,
+    TransferHttpService
+  ],
   bootstrap: [AppComponent],
-  exports: [AppComponent]
+  exports: [AppComponent],
+  entryComponents: [CreateRoomFormModalComponent]
 })
 export class AppModule {
   constructor() { }

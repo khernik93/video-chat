@@ -8,3 +8,4 @@ dist_root/styles.css
 dist_root/.DS_Store
 tests-report
 TESTS-PhantomJS*
+compiled

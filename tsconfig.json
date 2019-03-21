@@ -13,7 +13,8 @@
     "pretty": true,
     "sourceMap": true,
     "typeRoots": [
-      "node_modules/@types"
+      "node_modules/@types",
+      "src/**/*.d.ts"
     ],
     "outDir": "compiled"
   },
@@ -23,11 +24,6 @@
     "test",
     "server"
   ],
-  "awesomeTypescriptLoaderOptions": {
-    "useWebpackText": true,
-    "forkChecker": true,
-    "useCache": true
-  },
   "compileOnSave": true,
   "buildOnSave": false,
   "atom": { "rewriteTsconfig": false }
