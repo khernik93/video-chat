@@ -9,11 +9,6 @@ class StreamService {
    */
   fromCallback(cb: Function, args: any): Observable<any> {
     return Observable.create(observer => {
-      cb(args[0], (err, res) => {
-        observer.next(res);
-        observer.complete();
-      });
-      /*
       args.push((error, result) => {
         if (error) observer.error(error);
         else observer.next(result);
@@ -21,7 +16,6 @@ class StreamService {
       });
       
       cb.apply(this, args);
-      */
     });
   }
 

@@ -38,7 +38,7 @@ class RedisClient {
   get(key: string): Observable<any> {
     return this.connection$
       .pipe(
-        switchMap(() => streamService.fromCallback(this.instance.get, [key])),
+        switchMap(() => streamService.fromCallback.call(this.instance, this.instance.get, [key])),
         map((data: any) => JSON.parse(data))
       );
   }
@@ -59,7 +59,7 @@ class RedisClient {
   delete(key: string): Observable<void> {
     return this.connection$
       .pipe(
-        switchMap(() => streamService.fromCallback(this.instance.del, [key]))
+        switchMap(() => streamService.fromCallback.call(this.instance, this.instance.del, [key]))
       );
   }
 
