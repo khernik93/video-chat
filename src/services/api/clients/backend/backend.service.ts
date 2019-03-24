@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { ClientServiceI } from '../interfaces/clientService.interface';
 
 let ROUTES: any = {
-  createRoom: '/createRoom',
   joinRoom: '/joinRoom'
 };
 

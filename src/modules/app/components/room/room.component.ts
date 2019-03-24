@@ -13,7 +13,6 @@ export class RoomComponent implements OnInit {
   @Input() createRoomForm: FormGroup;
   @Input() joinRoomForm: FormGroup;
   @Output() onJoinRoom = new EventEmitter<NewRoom>();
-  @Output() onCreateRoom = new EventEmitter<NewRoom>();
 
   constructor(
     private modalService: NgbModal
@@ -46,14 +45,12 @@ export class RoomComponent implements OnInit {
   showCreateRoomFormModal() {
     const modalRef = this.modalService.open(CreateRoomFormModalComponent);
     modalRef.componentInstance.createRoomForm = this.createRoomForm;
-    modalRef.componentInstance.onCreateRoom.subscribe((newRoom: NewRoom) => {
-      this.onCreateRoom.emit(newRoom);
-    });
+    modalRef.componentInstance.onCreateRoom
+      .subscribe((newRoom: NewRoom) => this.onJoinRoom.emit(newRoom));
   }
 
   joinRoom() {
-    const newRoom: NewRoom = this.joinRoomForm.value;
-    this.onJoinRoom.emit(newRoom);
+    this.onJoinRoom.emit(this.joinRoomForm.value);
   }
 
 }

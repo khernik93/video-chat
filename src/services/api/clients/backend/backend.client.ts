@@ -20,13 +20,6 @@ export class BackendClient {
     );
   }
 
-  createRoom(newRoom: NewRoom): Observable<Room> {
-    return this.client.sendPostRequest({
-      uri: this.client.routes.createRoom,
-      payload: newRoom
-    });
-  }
-
   joinRoom(newRoom: NewRoom): Observable<Room> {
     return this.client.sendPostRequest({
       uri: this.client.routes.joinRoom,

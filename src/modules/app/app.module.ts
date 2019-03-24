@@ -21,6 +21,9 @@ import { BackendClient } from '../../services/api/clients/backend/backend.client
 import { BackendService } from '../../services/api/clients/backend/backend.service';
 import { TransferHttpService } from '../../services/api/transferHttp.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EffectsModule } from '@ngrx/effects';
+import { RoomEffects } from './containers/room/store/room.effects';
+import { RtcService } from '../../services/rtc/rtc.service';
 
 export const MODULE_DECLARATIONS = [
   DashboardComponent,
@@ -49,7 +52,10 @@ const ROUTING_MODULE_IMPORTS = [
 ];
 
 const STORE_IMPORTS = [
-  StoreModule.forRoot(syncReducers)
+  StoreModule.forRoot(syncReducers),
+  EffectsModule.forRoot([
+    RoomEffects
+  ])
 ];
 
 @NgModule({
@@ -67,7 +73,8 @@ const STORE_IMPORTS = [
     SocketService,
     BackendClient,
     BackendService,
-    TransferHttpService
+    TransferHttpService,
+    RtcService
   ],
   bootstrap: [AppComponent],
   exports: [AppComponent],

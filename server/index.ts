@@ -1,27 +1,14 @@
-const express = require('express');
-const path = require('path');
-const http = require('http');
-const socketio = require('socket.io');
+import { JoinRoomController } from './controllers/joinRoom.controller';
+import Server from './server';
+import { HttpMethod } from './utils/http.constants';
 
-const app = express();
-const server = http.createServer(app);
-const io = socketio(server);
+const server = new Server();
 
-app.post('/api/createRoom', function (req, res) {
-  res.send('aaa');
-});
+const joinRoomController = new JoinRoomController();
+server.attachController(
+  '/api/joinRoom', 
+  HttpMethod.post,
+  joinRoomController.handler.bind(joinRoomController)
+);
 
-app.post('/api/joinRoom', function (req, res) {
-  res.send('bbb');
-});
-
-io.on('connection', (socket) => {
-  socket.on('message', (message) => {
-    console.log(message);
-    io.sockets.emit('message', message);
-  });
-});
-
-server.listen(3011, () => {
-  console.log(`Listening on port 3011`);
-});
+server.start(3011);

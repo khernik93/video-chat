@@ -38,3 +38,8 @@ interface Room {
   id: string;
   initiator: boolean;
 }
+
+interface Peer {
+  type: string;
+  sdp: string;
+}

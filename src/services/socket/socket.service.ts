@@ -1,20 +1,32 @@
 import { Injectable } from '@angular/core';
 import socketIo from 'socket.io-client';
 import { Message } from './models/message.model';
+import { Observable, from } from 'rxjs';
+import { ObserveOnOperator } from 'rxjs/internal/operators/observeOn';
 
 const SERVER_URL = 'http://127.0.0.1:3011';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class SocketService {
 
-  private socket: any;
+  private static socket: any = null;
 
-  initSocket(): void {
-    this.socket = socketIo(SERVER_URL);
+  constructor() {
+    if (SocketService.socket === null) {
+      SocketService.socket = socketIo(SERVER_URL);
+    }
   }
 
-  public send(message: Message): void {
-    this.socket.emit('message', message);
+  public send(message: any): void {
+    SocketService.socket.emit('message', message);
+  }
+
+  public listenToPeerChanges() {
+    return new Observable<any>(observer => {
+      SocketService.socket.on('peers', (data: any) => observer.next(data));
+    });
   }
 
   /*

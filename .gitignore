@@ -9,3 +9,5 @@ dist_root/.DS_Store
 tests-report
 TESTS-PhantomJS*
 compiled
+server/config/config.js
+server_compiled

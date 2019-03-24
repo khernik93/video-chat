@@ -2,7 +2,7 @@ import { RoomActions, RoomActionTypes } from './room.actions';
 
 export interface RoomState {
   room: Room;
-  inCall: boolean;
+  inCall: boolean
 }
 
 export const initialState: RoomState = {
@@ -12,7 +12,7 @@ export const initialState: RoomState = {
 
 export function roomReducer(state = initialState, action: RoomActions): RoomState {
   switch (action.type) {
-    case RoomActionTypes.SetRoom: {
+    case RoomActionTypes.SetRoomSuccess: {
       return { ...state, room: action.room };
     }
     case RoomActionTypes.SetInCall: {

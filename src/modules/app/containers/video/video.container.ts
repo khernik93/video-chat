@@ -6,7 +6,6 @@ import { AppState } from '../../store/app.reducers';
 import { selectRoom, selectInCall } from '../room/store/room.selectors';
 import { SetInCall } from '../room/store/room.actions';
 import { VideoService } from '../../../../services/video/video.service';
-import { SocketService } from '../../../../services/socket/socket.service';
 
 @Component({
   selector: 'video-container',
@@ -31,8 +30,7 @@ export class VideoContainer {
 
   constructor(
     private store: Store<AppState>,
-    private videoService: VideoService,
-    private socketService: SocketService
+    private videoService: VideoService
   ) { 
     this.room$ = this.store.select(selectRoom);
     this.inCall$ = this.store.select(selectInCall);
